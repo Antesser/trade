@@ -1,7 +1,7 @@
-from typing import Any, List
+from typing import Any, Dict, List
 from fastapi import FastAPI
 
-from models import Trade
+from models import Trade, User
 
 
 app = FastAPI(title="App for trade")
@@ -10,13 +10,15 @@ fake_users = [
     {"id": 1, "role": "admin", "name": "alex"},
     {"id": 2, "role": "investor", "name": "bob"},
     {"id": 3, "role": "trader", "name": "pol"},
+    {
+        "id": 4,
+        "role": "investor",
+        "name": "mike",
+        "degree": [
+            {"id": 1, "created_at": "2024-08-21T00:00:00", "type": "expert"}
+        ],
+    },
 ]
-
-
-@app.get("/users/{user_id}")
-async def get_user(user_id: int) -> list[dict[str, Any]]:
-    return [user for user in fake_users if user.get("id") == int(user_id)]
-
 
 fake_trades = [
     {
@@ -36,6 +38,11 @@ fake_trades = [
         "amount": 3.65,
     },
 ]
+
+
+@app.get("/users/{user_id}", response_model=List[User])
+async def get_user(user_id: int) -> List[Dict[str, Any]]:
+    return [user for user in fake_users if user.get("id") == int(user_id)]
 
 
 @app.post("/trades")
