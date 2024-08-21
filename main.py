@@ -5,7 +5,7 @@ from fastapi.exceptions import ResponseValidationError
 from fastapi.responses import JSONResponse
 
 
-from models import Trade, User
+from models.schemas import Trade, User
 
 
 app = FastAPI(title="App for trade")
