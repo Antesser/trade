@@ -1,10 +1,25 @@
 from typing import Any, Dict, List
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import ResponseValidationError
+from fastapi.responses import JSONResponse
+
 
 from models import Trade, User
 
 
 app = FastAPI(title="App for trade")
+
+
+@app.exception_handler(ResponseValidationError)
+async def validation_exception_handler(
+    request: Request, exception: ResponseValidationError
+):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content=jsonable_encoder({"detail": exception.errors()}),
+    )
+
 
 fake_users = [
     {"id": 1, "role": "admin", "name": "alex"},
