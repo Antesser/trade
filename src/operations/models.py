@@ -15,7 +15,7 @@ operation = Table(
     "operation",
     metadata,
     Column("id", Integer, primary_key=True),
-    Column("quantity", String),
+    Column("quantity", Integer),
     Column("figi", String),
     Column("instrument_type", String, nullable=True),
     Column(
