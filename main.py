@@ -64,3 +64,4 @@ async def get_user(user_id: int) -> List[Dict[str, Any]]:
 async def add_trades(trades: List[Trade]):
     fake_trades.extend(trades)
     return {"status": 200, "data": fake_trades}
+
