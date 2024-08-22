@@ -9,9 +9,9 @@ from fastapi_users import (
     schemas,
 )
 
-from src.auth.models import User
-from src.auth.utils import get_user_db
-from src.config import MANAGER_SECRET
+from auth.models import User
+from auth.utils import get_user_db
+from config import MANAGER_SECRET
 
 SECRET = MANAGER_SECRET
 

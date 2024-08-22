@@ -1,10 +1,11 @@
 from fastapi import Depends, FastAPI
+import uvicorn
 
 
-from src.auth.base_config import auth_backend, fastapi_users, current_user
-from src.auth.schemas import UserCreate, UserRead
-from src.auth.models import User
-from src.operations.router import router as router_ops
+from auth.base_config import auth_backend, fastapi_users, current_user
+from auth.schemas import UserCreate, UserRead
+from auth.models import User
+from operations.router import router as router_ops
 
 app = FastAPI(title="App for trade")
 
@@ -30,4 +31,8 @@ def protected_route(user: User = Depends(current_user)):
 def unprotected_route():
     return "Hello, man"
 
+
 app.include_router(router_ops)
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", reload=True)

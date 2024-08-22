@@ -1,2 +1,2 @@
 start:
-	uvicorn src.main:app --reload
+	python3 src/main.py
