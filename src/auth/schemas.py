@@ -5,6 +5,9 @@ class UserRead(schemas.BaseUser[int]):
     username: str
     role_id: int
 
+    class Config:
+        orm_mode = True
+
 
 class UserCreate(schemas.BaseUserCreate):
     username: str

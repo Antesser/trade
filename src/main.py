@@ -1,9 +1,9 @@
 from fastapi import Depends, FastAPI
 
 
-from auth.base_config import auth_backend, fastapi_users, current_user
-from auth.schemas import UserCreate, UserRead
-from auth.models import User
+from src.auth.base_config import auth_backend, fastapi_users, current_user
+from src.auth.schemas import UserCreate, UserRead
+from src.auth.models import User
 
 app = FastAPI(title="App for trade")
 
