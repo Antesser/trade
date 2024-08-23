@@ -45,6 +45,6 @@ def unprotected_route():
 
 app.include_router(router_ops)
 
-
+import _ctypes
 if __name__ == "__main__":
     uvicorn.run("main:app", reload=True)
