@@ -8,7 +8,7 @@ router = APIRouter(prefix="/reports", tags=["report"])
 
 
 @router.get("/dashboard")
-def get_dashboard_report(user=Depends(current_user)):
+def get_dashboard_report(recipient_name: str, user=Depends(current_user)):
     # background_tasks.add_task(send_email_report_dashboard, username)
-    send_email_report_dashboard.delay(user.username)
+    send_email_report_dashboard.delay(recipient_name, user.username)
     return {"status": 200, "data": "Letter has been sent", "details": None}
