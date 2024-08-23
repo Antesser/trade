@@ -14,7 +14,7 @@ router = APIRouter(prefix="/operations", tags=["operation"])
 @cache(expire=90)
 async def get_long_operation(delay:int):
 
-    asyncio.sleep(delay)
+    await asyncio.sleep(delay)
     return {
         "status": "faster than a bullet",
         "data": f"we've not waited for {delay} sec",
