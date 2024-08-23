@@ -3,7 +3,7 @@ from email.message import EmailMessage
 
 from celery import Celery
 
-from src.config import SMTP_PASSWORD, SMTP_RECIPIENT, SMTP_USER
+from config import SMTP_PASSWORD, SMTP_RECIPIENT, SMTP_USER
 
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
