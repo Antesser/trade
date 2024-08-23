@@ -6,8 +6,19 @@ from auth.base_config import auth_backend, fastapi_users, current_user
 from auth.schemas import UserCreate, UserRead
 from auth.models import User
 from operations.router import router as router_ops
+from contextlib import asynccontextmanager
+from collections.abc import AsyncIterator
+from redis import asyncio as aioredis
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
 
-app = FastAPI(title="App for trade")
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    redis = aioredis.from_url("redis://localhost")
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    yield
+
+app = FastAPI(title="App for trade", lifespan=lifespan)
 
 
 app.include_router(
@@ -33,6 +44,7 @@ def unprotected_route():
 
 
 app.include_router(router_ops)
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", reload=True)
