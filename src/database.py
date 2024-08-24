@@ -1,4 +1,5 @@
 from typing import AsyncGenerator
+
 from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
@@ -6,9 +7,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
-
 
 metadata = MetaData()
 

@@ -12,17 +12,21 @@ async def test_add_role():
 
         query = select(role)
         result = await session.execute(query)
-        assert result.all() == [(1, 'admin', None)]
+        assert result.all() == [(1, "admin", None)]
+
 
 def test_register():
-    response = client.post("/auth/register", json={
-        "email": "3user@example.com",
-        "password": "password",
-        "is_active": True,
-        "is_superuser": False,
-        "is_verified": False,
-        "username": "string",
-        "role_id": 1
-    })
+    response = client.post(
+        "/auth/register",
+        json={
+            "email": "3user@example.com",
+            "password": "password",
+            "is_active": True,
+            "is_superuser": False,
+            "is_verified": False,
+            "username": "string",
+            "role_id": 1,
+        },
+    )
 
     assert response.status_code == 201

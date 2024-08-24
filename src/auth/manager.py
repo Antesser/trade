@@ -4,8 +4,8 @@ from fastapi import Depends, Request
 from fastapi_users import (
     BaseUserManager,
     IntegerIDMixin,
-    models,
     exceptions,
+    models,
     schemas,
 )
 

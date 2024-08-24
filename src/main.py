@@ -1,17 +1,17 @@
-from fastapi import Depends, FastAPI
-import uvicorn
-
-
-from auth.base_config import auth_backend, fastapi_users, current_user
-from auth.schemas import UserCreate, UserRead
-from auth.models import User
-from operations.router import router as router_ops
-from tasks.router import router as router_tasks
-from contextlib import asynccontextmanager
 from collections.abc import AsyncIterator
-from redis import asyncio as aioredis
+from contextlib import asynccontextmanager
+
+import uvicorn
+from fastapi import Depends, FastAPI
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
+from redis import asyncio as aioredis
+
+from auth.base_config import auth_backend, current_user, fastapi_users
+from auth.models import User
+from auth.schemas import UserCreate, UserRead
+from operations.router import router as router_ops
+from tasks.router import router as router_tasks
 
 
 @asynccontextmanager
