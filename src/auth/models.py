@@ -8,13 +8,12 @@ from sqlalchemy import (
     Column,
     ForeignKey,
     Integer,
-    MetaData,
     String,
     Table,
 )
 from sqlalchemy.orm import DeclarativeBase
 
-metadata = MetaData()
+from database import metadata
 
 role = Table(
     "role",

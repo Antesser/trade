@@ -10,16 +10,17 @@ from fastapi_cache.decorator import cache
 
 router = APIRouter(prefix="/operations", tags=["operation"])
 
+
 @router.get("/long_operation")
 @cache(expire=90)
-async def get_long_operation(delay:int):
-
+async def get_long_operation(delay: int):
     await asyncio.sleep(delay)
     return {
         "status": "faster than a bullet",
         "data": f"we've not waited for {delay} sec",
         "details": None,
     }
+
 
 @router.get("/")
 async def get_specific_operations(
@@ -36,7 +37,11 @@ async def get_specific_operations(
     except Exception:
         raise HTTPException(
             status_code=400,
-            detail={"status": "err", "data": None, "details": "wild exception occured"},
+            detail={
+                "status": "err",
+                "data": None,
+                "details": "wild exception occured",
+            },
         )
 
 
