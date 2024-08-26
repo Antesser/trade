@@ -4,16 +4,14 @@ from fastapi_users.db import SQLAlchemyBaseUserTable
 from sqlalchemy import (
     JSON,
     TIMESTAMP,
-    Boolean,
     Column,
     ForeignKey,
     Integer,
     String,
     Table,
 )
-from sqlalchemy.orm import DeclarativeBase
 
-from database import metadata
+from database import Base, metadata
 
 role = Table(
     "role",
@@ -23,30 +21,9 @@ role = Table(
     Column("permissions", JSON),
 )
 
-user = Table(
-    "user",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("email", String, nullable=False),
-    Column("username", String, nullable=False),
-    Column("hashed_password", String, nullable=False),
-    Column(
-        "registered_at",
-        TIMESTAMP(timezone=True),
-        default=datetime.now(timezone.utc),
-    ),
-    Column("role_id", Integer, ForeignKey(role.c.id)),
-    Column("is_active", Boolean, default=True, nullable=False),
-    Column("is_superuser", Boolean, default=False, nullable=False),
-    Column("is_verified", Boolean, default=False, nullable=False),
-)
-
-
-class Base(DeclarativeBase):
-    pass
-
 
 class User(SQLAlchemyBaseUserTable[int], Base):
+    __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     username = Column(String, nullable=False)
     registered_at = Column(

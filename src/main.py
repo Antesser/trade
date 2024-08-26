@@ -15,6 +15,7 @@ from auth.schemas import UserCreate, UserRead
 from operations.router import router as router_ops
 from pages.router import router as router_pages
 from tasks.router import router as router_tasks
+from chat.router import router as router_chat
 
 
 @asynccontextmanager
@@ -53,19 +54,20 @@ def unprotected_route():
 app.include_router(router_ops)
 app.include_router(router_tasks)
 app.include_router(router_pages)
+app.include_router(router_chat)
 
 
 origins = [
     "http://localhost:8000",
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "PATCH", "UPDATE", "DELETE"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["GET", "POST", "PUT", "PATCH", "UPDATE", "DELETE"],
+#     allow_headers=["*"],
+# )
 
 
 if __name__ == "__main__":
